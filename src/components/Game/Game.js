@@ -13,13 +13,12 @@ class Game extends Component {
 
     handleOnChange = e => {
         const {target: {value}} = e;
-        console.log(value);
-        if(value > 0) {
+        if(value >= 0) {
             this.setState({number: value});
         }
     }
 
-    handleOnClick = () => {
+    handleOnClick = e => {
         const number = parseInt(this.state.number);
         const random = parseInt(this.state.random);
 
@@ -28,21 +27,33 @@ class Game extends Component {
         this.setState({
             message: text
         })
+        e.preventDefault();
     }
 
     render() {
-        console.log(this.state.random);
         return (
-            <div className="Game">
+            /*<div className="Game">
                 <input 
                     type="number"
                     value={this.state.number}
                     onChange = {this.handleOnChange}
                 />
 
-                <button onclick = {this.handleOnClick}>Probar</button>
+                <button onClick = {this.handleOnClick}>Probar</button>
                 <p>{this.state.message}</p>
-            </div>
+            </div>*/
+            <form onSubmit={this.handleOnClick}>
+                <div className="Game">
+                <input 
+                    type="number"
+                    value={this.state.number}
+                    onChange = {this.handleOnChange}
+                />
+
+                    <input type="submit" />
+                    <p>{this.state.message}</p>
+                </div>
+            </form>
         );
     }
 }
@@ -54,7 +65,22 @@ function generateRandomNumber(max, min = 1) {
 }
 
 function calculateText(number, random) {
+    console.log(number + "  " + random);
     if(number === random) {
         return "Felicidades acertaste";
+    }
+    else if(number < random) {
+        if(random - number < 10) {
+            return "Te quedaste corto, pero estas cerca";
+        }
+        else
+            return "Te quedaste corto";
+    }
+    else {
+        if(number - random < 10) {
+            return "Te pasaste, pero estas cerca";
+        }
+        else
+            return "Te pasaste";
     }
 }
