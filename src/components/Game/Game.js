@@ -6,7 +6,7 @@ class Game extends Component {
         super();
         this.state = {
             number: "",
-            message: "Hola",
+            message: "",
             random: generateRandomNumber(100)
         }
     }
@@ -18,40 +18,38 @@ class Game extends Component {
         }
     }
 
-    handleOnClick = e => {
+    handleOnSubmit = e => {
         const number = parseInt(this.state.number);
         const random = parseInt(this.state.random);
 
         const text = calculateText(number, random);
 
+        if(text === "Felicidades acertaste") {
+            document.getElementById('1d').style.border = "5px solid green";
+        }
+
         this.setState({
-            message: text
+            message: text,
+            number: ""
         })
         e.preventDefault();
     }
 
     render() {
         return (
-            /*<div className="Game">
-                <input 
-                    type="number"
-                    value={this.state.number}
-                    onChange = {this.handleOnChange}
-                />
-
-                <button onClick = {this.handleOnClick}>Probar</button>
-                <p>{this.state.message}</p>
-            </div>*/
-            <form onSubmit={this.handleOnClick}>
+            <form onSubmit={this.handleOnSubmit}>
                 <div className="Game">
+                <p className="txt">Adivina el numero del 1 - 100</p>
                 <input 
                     type="number"
+                    className= "num"
+                    id = '1d'
                     value={this.state.number}
                     onChange = {this.handleOnChange}
                 />
-
-                    <input type="submit" />
-                    <p>{this.state.message}</p>
+                    <p></p>
+                    <input type="submit" className = "btn"/>
+                    <p className= "txt">{this.state.message}</p>
                 </div>
             </form>
         );
@@ -71,16 +69,16 @@ function calculateText(number, random) {
     }
     else if(number < random) {
         if(random - number < 10) {
-            return "Te quedaste corto, pero estas cerca";
+            return "" + number + " se queda corto, pero estas cerca";
         }
         else
-            return "Te quedaste corto";
+            return "" + number + " se queda corto";
     }
     else {
         if(number - random < 10) {
-            return "Te pasaste, pero estas cerca";
+            return "" + number + " se pasa, pero estas cerca";
         }
         else
-            return "Te pasaste";
+            return "" + number + " se pasa";
     }
 }

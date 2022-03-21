@@ -4,3 +4,26 @@
     align-items: center;
     margin: 16px;
 }
+
+.btn {
+    background-color: green;
+    color: aqua;
+    padding: 15px 32px;
+    font-size: 24px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.txt {
+    color: rgb(140, 95, 212);
+    background-color: burlywood;
+    padding: 15px 32px;
+    font-size: 34px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.num {
+    padding: 10px;
+    font-size: 34px;
+    border-radius: 5px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
