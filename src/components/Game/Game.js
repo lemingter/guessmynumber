@@ -65,6 +65,7 @@ class Game extends Component {
                         <p className= "txt">{this.state.message}</p>
                     </div>
                 </form>
+                <p className= "txt">Tus intentos</p>
                 <List tries = {this.state.tries} />
             </div>
         );
