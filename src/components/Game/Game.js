@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Game.css';
+import List from './List';
 
 class Game extends Component {
     constructor() {
@@ -7,7 +8,9 @@ class Game extends Component {
         this.state = {
             number: "",
             message: "",
-            random: generateRandomNumber(100)
+            random: generateRandomNumber(100),
+            tries: [],
+            numTries: 1,
         }
     }
 
@@ -22,36 +25,48 @@ class Game extends Component {
         const number = parseInt(this.state.number);
         const random = parseInt(this.state.random);
 
-        const text = calculateText(number, random);
+        this.setState({
+            tries: [
+                ...this.state.tries,
+                this.state.number,
+            ],
+            numTries: this.state.numTries + 1,
+        })
+
+        var text = calculateText(number, random);
 
         if(text === "Felicidades acertaste") {
             document.getElementById('1d').style.border = "5px solid green";
+            text += " en " + this.state.numTries + " intentos"
         }
 
         this.setState({
             message: text,
-            number: ""
+            number: "",
         })
         e.preventDefault();
     }
 
     render() {
         return (
-            <form onSubmit={this.handleOnSubmit}>
-                <div className="Game">
-                <p className="txt">Adivina el numero del 1 - 100</p>
-                <input 
-                    type="number"
-                    className= "num"
-                    id = '1d'
-                    value={this.state.number}
-                    onChange = {this.handleOnChange}
-                />
-                    <p></p>
-                    <input type="submit" className = "btn"/>
-                    <p className= "txt">{this.state.message}</p>
-                </div>
-            </form>
+            <div>
+                <form onSubmit={this.handleOnSubmit}>
+                    <div className="Game">
+                    <p className="txt">Adivina el numero del 1 - 100</p>
+                    <input 
+                        type="number"
+                        className= "num"
+                        id = '1d'
+                        value={this.state.number}
+                        onChange = {this.handleOnChange}
+                    />
+                        <p></p>
+                        <input type="submit" className = "btn"/>
+                        <p className= "txt">{this.state.message}</p>
+                    </div>
+                </form>
+                <List tries = {this.state.tries} />
+            </div>
         );
     }
 }

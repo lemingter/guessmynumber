@@ -1,3 +1,11 @@
+body {
+    background-color: burlywood;
+}
+
+ul {
+    font-size: 20px;
+}
+
 .Game {
     display: flex;
     flex-direction: column;
@@ -15,7 +23,6 @@
 
 .txt {
     color: rgb(140, 95, 212);
-    background-color: burlywood;
     padding: 15px 32px;
     font-size: 34px;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
